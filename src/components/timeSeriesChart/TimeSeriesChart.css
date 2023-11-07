@@ -1,0 +1,20 @@
+.time-series-chart {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .time-series-chart h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  /* Customize the chart container's styles if needed */
+  .apexcharts-container {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }  

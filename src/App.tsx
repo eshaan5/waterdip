@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import DateSelector from "./components/dateSelector/DateSelector";
+import TimeSeriesChart from "./components/timeSeriesChart/TimeSeriesChart";
+import axios from "axios";
+
+const API = axios.create({ baseURL: "https://waterdip-data.vercel.app/entries" });
 
 function App() {
   const [selectedDateRange, setSelectedDateRange] = useState<{ start: Date; end: Date }>({
@@ -8,11 +12,68 @@ function App() {
     end: new Date("2015-07-01"),
   });
 
-  console.log(selectedDateRange);
+  const [entries, setEntries] = useState<
+    [
+      {
+        adults: string;
+        arrival_date_day_of_month: string;
+        arrival_date_month: string;
+        arrival_date_year: string;
+        babies: string;
+        children: string;
+        country: string;
+        hotel: string;
+        __v: number;
+        _id: string;
+      }
+    ]
+  >([
+    {
+      adults: "",
+      arrival_date_day_of_month: "",
+      arrival_date_month: "",
+      arrival_date_year: "",
+      babies: "",
+      children: "",
+      country: "",
+      hotel: "",
+      __v: 0,
+      _id: "",
+    },
+  ]);
+  const [filteredEntries, setFilteredEntries] = useState(entries);
+
+  useEffect(() => {
+    const fetchEntries = async () => {
+      const { data } = await API.get("/");
+      setEntries(data);
+    };
+
+    fetchEntries();
+  }, []);
+
+  useEffect(() => {
+    const res = entries.filter((entry) => {
+      const entryDate = new Date(`${entry.arrival_date_year}-${entry.arrival_date_month}-${entry.arrival_date_day_of_month}`);
+      const startTime = new Date(selectedDateRange.start);
+      const endTime = new Date(selectedDateRange.end);
+
+      // Set the time component of the start and end date to ensure that
+      // the comparison includes the entire day
+      startTime.setHours(0, 0, 0, 0);
+      endTime.setHours(23, 59, 59, 999);
+      return entryDate >= startTime && entryDate <= endTime;
+    });
+
+    // Update the 'entries' state with the filtered entries
+    setFilteredEntries(res as typeof entries);
+  }, [selectedDateRange, entries]);
+
   return (
     <div className="App">
       <h1>React Date Range Selector</h1>
       <DateSelector selectedDateRange={selectedDateRange} onDateRangeChange={setSelectedDateRange} />
+      <TimeSeriesChart selectedDateRange={selectedDateRange} entries={filteredEntries} />
     </div>
   );
 }
