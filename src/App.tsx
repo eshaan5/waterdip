@@ -3,6 +3,7 @@ import "./App.css";
 import DateSelector from "./components/dateSelector/DateSelector";
 import TimeSeriesChart from "./components/timeSeriesChart/TimeSeriesChart";
 import axios from "axios";
+import ColumnChart from "./components/columnChart/ColumnChart";
 
 const API = axios.create({ baseURL: "https://waterdip-data.vercel.app/entries" });
 
@@ -71,9 +72,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1>React Date Range Selector</h1>
+      <h1>Dashboard App</h1>
       <DateSelector selectedDateRange={selectedDateRange} onDateRangeChange={setSelectedDateRange} />
       <TimeSeriesChart selectedDateRange={selectedDateRange} entries={filteredEntries} />
+      <ColumnChart data={filteredEntries} />
     </div>
   );
 }
