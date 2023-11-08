@@ -1,0 +1,35 @@
+/* SparklineChart.css */
+
+/* Style the SparklineChart container */
+.sparkline-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 4px;
+}
+
+/* Style the chart title */
+.sparkline-chart h4 {
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+/* Style the chart container */
+.sparkline-chart .apexcharts-canvas {
+  background-color: #f9f9f9;
+}
+
+/* Style the Sparkline line */
+.sparkline-chart .apexcharts-line path {
+  stroke: #007bff; /* Line color */
+}
+
+/* Style the Sparkline fill area below the line */
+.sparkline-chart .apexcharts-area {
+  fill: #007bff; /* Area color */
+  fill-opacity: 0.2; /* Opacity of the area */
+}

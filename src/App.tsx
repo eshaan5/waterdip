@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import DateSelector from "./components/dateSelector/DateSelector";
 import TimeSeriesChart from "./components/timeSeriesChart/TimeSeriesChart";
 import axios from "axios";
 import ColumnChart from "./components/columnChart/ColumnChart";
+import SparklineChart from "./components/sparklineChart/SparklineChart";
 
 const API = axios.create({ baseURL: "https://waterdip-data.vercel.app/entries" });
 
@@ -74,8 +75,10 @@ function App() {
     <div className="App">
       <h1>Dashboard App</h1>
       <DateSelector selectedDateRange={selectedDateRange} onDateRangeChange={setSelectedDateRange} />
-      <TimeSeriesChart selectedDateRange={selectedDateRange} entries={filteredEntries} />
+      <TimeSeriesChart entries={filteredEntries} />
       <ColumnChart data={filteredEntries} />
+      <SparklineChart data={filteredEntries} title="Total Adult Visitors" />
+      <SparklineChart data={filteredEntries} title="Total Children Visitors" />
     </div>
   );
 }

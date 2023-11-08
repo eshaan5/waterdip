@@ -3,7 +3,6 @@ import ReactApexChart from "react-apexcharts";
 import "./TimeSeriesChart.css";
 
 interface TimeSeriesChartProps {
-  selectedDateRange: { start: Date; end: Date };
   entries: [
     {
       adults: string;
@@ -20,7 +19,7 @@ interface TimeSeriesChartProps {
   ];
 }
 
-const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ selectedDateRange, entries }) => {
+const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ entries }) => {
   // Sample data (replace with your actual data)
   const chartData = entries
     .reduce(
