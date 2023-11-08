@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import DateSelector from "./components/dateSelector/DateSelector";
 import TimeSeriesChart from "./components/timeSeriesChart/TimeSeriesChart";
 import axios from "axios";
